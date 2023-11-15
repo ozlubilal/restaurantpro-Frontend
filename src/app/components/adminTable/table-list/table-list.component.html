@@ -1,0 +1,31 @@
+<div class="row ">
+    <div class="col-md-2">
+        <app-admin></app-admin>
+    </div>
+    <div class="card col-md-10 mt-2">
+        <a href="/admin/tableAdd" class="btn btn-primary w-25" >Yeni Masa EKle</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 5%"></th>
+                    <th >Masa Adı</th>
+                    <th class="text-center">Kat</th>
+                    <th class="text-center">Masa Türü</th>
+                    <th class="text-center">Güncelle</th>
+                    <th class="text-center">Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let table of tableDetails;let i = index;let sum=index" [attr.data-index]="i"
+                    [attr.data-index]="sum">
+                    <td class="border-2 text-center">{{i+1}}</td>
+                    <td>{{table.tableName}}</td>
+                    <td class="text-center">{{table.floorName}}</td>
+                    <td class="text-center">{{table.seaterOfTableName}}</td>                  
+                    <td class="text-center"><button class="btn btn-success btn-sm" routerLink="/admin/tableUpdate/{{table.id}}">Güncelle</button></td>
+                    <td class="text-center"><button class="btn btn-danger btn-sm" (click)="delete(table.id)">Sil</button></td>
+                </tr>    
+            </tbody>
+        </table>
+    </div>
+</div>

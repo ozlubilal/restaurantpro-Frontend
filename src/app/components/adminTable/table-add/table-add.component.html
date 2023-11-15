@@ -1,0 +1,42 @@
+<div class="row ">
+    <div class="col-md-2">
+        <app-admin></app-admin>
+    </div>
+    <div class="card col-md-10 mt-2">
+        <div class="card-header">Masa Ekle</div>
+        <form class="" [formGroup]="tableAddForm">
+            <div class=" col-md-8 alert">                   
+                    <div class="col-auto mt-2 w-25 ">
+                        <label for="tableName">Masa Adı</label>
+                        <div class="form-group"><input type="text" id="tableName" formControlName="tableName" class="form-control"
+                                placeholder="Masa Adı" />
+                        </div>
+                    </div>
+                    <div class="col-auto mt-2  ">
+                        <label for="floorName">Kat</label>
+                        <div class="form-group">
+                            <select class="form-control" id="floorName" formControlName="floorName" style="width:120px;">
+                                <option>Kat</option>
+                                <option *ngFor="let floor of floors">{{floor.floorName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-auto mt-2  ">
+                        <label for="SeaterOfTableName">Masa Türü</label>
+                        <div class="form-group">
+                            <select class="form-control" id="seaterOfTableName" formControlName="seaterOfTableName" style="width:120px;">
+                                <option>Masa Türü</option>
+                                <option *ngFor="let seaterOfTable of seaterOfTables">{{seaterOfTable.seaterOfTableName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                  
+               
+               
+                <div class="mx-auto pb-auto" style="width:100px;">
+                    <button class="btn btn-fill  btn-primary" (click)="add()">Ekle</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

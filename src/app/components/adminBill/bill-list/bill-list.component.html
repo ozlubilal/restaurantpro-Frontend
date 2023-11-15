@@ -1,0 +1,28 @@
+<div class="row ">
+    <div class="col-md-2">
+        <app-admin></app-admin>
+    </div>
+    <div class="card col-md-10 mt-2">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 5%"></th>
+                    <th>Tarih</th>
+                    <th>Durum</th>
+                    <th>Tahsilat</th>
+                    <th>Ciro</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let storeBillDetail of storeBillDetails;let i = index;let sum=index" [attr.data-index]="i"
+                    [attr.data-index]="sum">
+                    <td class="border-2 text-center">{{i+1}}</td>
+                    <td>{{storeBillDetail.startDate | date}} - {{storeBillDetail.finishDate |date}}</td>
+                    <td>{{storeBillDetail.storeBillStatusName}}</td>   
+                    <td>{{storeBillDetail.billOfPayedCount}}</td>     
+                    <td>{{storeBillDetail.storeBillAmount}}</td>          
+                </tr>    
+            </tbody>
+        </table>
+    </div>
+</div>

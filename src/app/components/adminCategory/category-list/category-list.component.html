@@ -1,0 +1,27 @@
+<div class="row ">
+    <div class="col-md-2">
+        <app-admin></app-admin>
+    </div>
+    <div class="card col-md-10 mt-2">
+        <a href="/admin/categoryAdd" class="btn btn-primary w-25" >Yeni Kategori Ekle</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 5%"></th>
+                    <th>Ürün Adı</th>
+                    <th class="text-center">Güncelle</th>
+                    <th class="text-center">Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let category of categories;let i = index;let sum=index" [attr.data-index]="i"
+                    [attr.data-index]="sum">
+                    <td class="border-2 text-center">{{i+1}}</td>
+                    <td>{{category.categoryName}}</td>
+                    <td class="text-center"><button class="btn btn-success btn-sm"routerLink="/admin/categoryUpdate/{{category.id}}">Güncelle</button></td>
+                    <td class="text-center"><button class="btn btn-danger btn-sm" (click)="delete(category)">Sil</button></td>
+                </tr>    
+            </tbody>
+        </table>
+    </div>
+</div>

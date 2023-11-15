@@ -1,0 +1,23 @@
+<div class="row ">
+    <div class="col-md-2">
+        <app-admin></app-admin>
+    </div>
+    <div class="card col-md-10 mt-2">
+        <div class="card-header">Katagori Ekle</div>
+        <form class="" [formGroup]="categoryAddForm">
+            <div class=" col-md-8 alert">
+                <div class="row mb-3">
+                    <div class="col-auto ">
+                        <label for="categoryName">Kategori Adı</label>
+                        <div class="form-group"><input type="text" id="categoryName" formControlName="categoryName" class="form-control"
+                                placeholder="Kategori Adı" />
+                        </div>
+                    </div>
+                </div>
+                <div class="mx-auto pb-auto" style="width:100px;">
+                    <button class="btn btn-fill  btn-primary" (click)="add()">Ekle</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

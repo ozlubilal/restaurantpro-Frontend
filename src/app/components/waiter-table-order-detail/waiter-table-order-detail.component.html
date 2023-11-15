@@ -1,0 +1,65 @@
+
+<div class="row m-1">
+    <!-- sidebar -->
+    <div class="card col-md-2 bg-secondary " style="min-height:700px;">
+       <div class="card-header bg-light " *ngIf="categories">
+        <a class="" href="/waiter/index"> <h5>Ana Ekrana Dön</h5></a>
+        <h4 class="text-center" *ngIf="table">{{table.tableName}}</h4>
+        </div>
+        <!-- acordion -->
+        <div class="accordion mt-3" id="accordionExample">
+            <div class="accordion-item bg-light" *ngFor="let category of categories">
+                
+                    <button class="btn btn-light" type="button" (click)="getProductsByCategoryId(category.id)"
+                        data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                        aria-controls="collapseOne" style="font-size: 18px;">
+                        {{category.categoryName}}
+                    </button>
+               
+                <div id="collapseOne" *ngFor="let product of productsOfCategory" class="accordion-collapse collapse show "
+                    aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body" *ngIf="product&&product.categoryId==category.id">
+                        <button class="btn btn-warning btn-sm" (click)="addOrder(product)">{{product.productName}}</button>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    <!-- content -->
+    <div class="card col" >
+        <div class="card-header row" >
+          <div class="col text-left" ><h2>Mevcut Siparişler </h2></div> 
+          <div class="col text-end">
+            <button class="btn btn-danger" *ngIf="xx==false" (click)="addBill()"> Hesap Aç</button>
+            <button class="btn btn-danger" *ngIf="dataLoad&&!orderDetails[0]&&xx==true" (click)="deleteBill(bill)"> Hesap Kapat </button>
+        </div>
+        </div>
+        <div class="card-body">
+            <table class="table" >
+                <thead>
+                    <tr>
+                        <th style="width: 5%"></th>
+                        <th>Ürün Adı</th>
+                        <th>Fiyat</th>
+                        <th>Miktar</th>
+                        <th>Güncelle</th>
+                        <th>Durum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let orderDetail of orderDetails;let i = index" [attr.data-index]="i">
+                        <td>{{i+1}}</td>
+                        <td>{{orderDetail.productName}}</td>
+                        <td>{{orderDetail.billId}}</td>
+                        <td>{{orderDetail.quantity}}</td>
+                        <td><button class="btn btn-danger btn-sm"  (click)="downQuantity(orderDetail)" *ngIf="orderDetail.orderStatusName=='Bekliyor'" >-</button>
+                            <button class="btn btn-success btn-sm mx-2"(click)="upQuantity(orderDetail)" *ngIf="orderDetail.orderStatusName=='Bekliyor'">+</button></td>
+                        <td>{{orderDetail.orderStatusName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

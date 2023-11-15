@@ -1,0 +1,23 @@
+<div class="row ">
+    <div class="col-md-2">
+        <app-admin></app-admin>
+    </div>
+    <div class="card col-md-10 mt-2">
+        <div class="card-header">Kat Güncelle</div>
+        <form class="" [formGroup]="floorUpdateForm" *ngIf="floor">
+            <div class=" col-md-8 alert">
+                <div class="row mb-3">
+                    <div class="col-auto ">
+                        <label for="floorName">Kat Adı</label>
+                        <div class="form-group"><input type="text" id="floorName" formControlName="floorName" class="form-control"
+                                placeholder="Kat Adı" />
+                        </div>
+                    </div>
+                </div>
+                <div class="mx-auto pb-auto" style="width:100px;">
+                    <button class="btn btn-fill  btn-primary" (click)="update()">Güncelle</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

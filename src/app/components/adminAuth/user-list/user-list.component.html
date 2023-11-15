@@ -1,0 +1,33 @@
+<div class="row ">
+    <div class="col-md-2">
+        <app-admin></app-admin>
+    </div>
+    <div class="card col-md-10 mt-2">
+        <a href="/admin/userAdd" class="btn btn-primary w-25" >Yeni Kullanıcı EKle</a>
+        <table class="table">            
+            <thead>
+                <tr>
+                    <th style="width: 5%"></th>
+                    <th>Adı</th>
+                    <th>Soyadı</th>
+                    <th>Yetki</th>
+                    <th>Email</th>
+                    <th class="text-center">Güncelle</th>
+                    <th class="text-center">Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of userDetails;let i = index;let sum=index" [attr.data-index]="i"
+                    [attr.data-index]="sum">
+                    <td class="border-2 text-center">{{i+1}}</td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.claimName}}</td>  
+                    <td>{{user.email}}</td>                  
+                    <td class="text-center"><button class="btn btn-success btn-sm" routerLink="/admin/userUpdate/{{user.userId}}">Güncelle</button></td>
+                    <td class="text-center"><button class="btn btn-danger btn-sm" (click)="delete(user.userId)">Sil</button></td>
+                </tr>    
+            </tbody>
+        </table>
+    </div>
+</div>

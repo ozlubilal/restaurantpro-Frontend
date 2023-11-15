@@ -1,0 +1,25 @@
+<div class="row ">
+    <div class="col-md-2">
+        <app-admin></app-admin>
+    </div>
+    <div class="card col-md-10 mt-2">
+        <div class="card-header">Kat Ekle</div>
+        <form class="" [formGroup]="floorAddForm">
+            <div class=" col-md-8 alert">
+                <div class="row mb-3">
+                    <div class="col-auto ">
+                        <label for="categoryName">Kat Adı</label>
+                        <div class="form-group"><input type="text" id="floorName" formControlName="floorName" class="form-control"
+                                placeholder="Kat Adı" />
+                        </div>
+                    </div>
+                </div>
+                <div class="m-5 row" style="width:200px;">
+                    <div class="col"> <button class="btn   btn-danger" routerLink="/admin/floorList">İptal</button></div>
+                   <div class="col"><button class="btn   btn-primary" (click)="add()">Ekle</button></div>
+                    
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

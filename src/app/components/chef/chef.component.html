@@ -1,0 +1,59 @@
+<div class=""*ngIf="storeBill">
+<div class="row m-1">
+    <div class="card col-md-2  text-bg-secondary" style=" min-height:700px;">
+        <button class="btn btn btn-light mt-2" (click)=" getAllOrderDetailsOfActive()">Tüm Siparişler<h4>{{allOrderCount}}</h4> </button>
+        <button class="btn btn btn-warning mt-2" (click)="filterOrderDetails('Bekliyor')">Bekleyen Siparişler<h4>{{pendingOrderCount}} </h4> </button>
+        <button class="btn btn btn-info mt-2" (click)="filterOrderDetails('Hazirlaniyor')">İşleme Alınan Siparişler<h4>{{processedOrderCount}} </h4> </button>
+        <button class="btn btn btn-success mt-2" (click)="filterOrderDetails('Servis Edildi')">Servis Edilen Siparişler<h4>{{servicedOrderCount}} </h4> </button>
+    </div>
+
+
+<div class="card col">
+    <table class="table" >
+        <thead>
+            <tr>
+                <th style="width: 5%"></th>
+                <th>
+                    <select class="form-select w-75" *ngIf="tables" aria-label="Default select example" #mySelect (change)='onOptionsSelectedCategory(mySelect.value)'>                        
+                        <option selected value="0">Kategoriler</option>
+                        <option  *ngFor="let categoryName of categoriesForListBox" >{{categoryName}}</option>
+                      </select>
+
+                </th>
+                <th>
+                    <select class="form-select w-50" *ngIf="tables" aria-label="Default select example" #mySelect (change)='onOptionsSelectedProduct(mySelect.value)'>                        
+                        <option selected value="0">Ürünler</option>
+                        <option  *ngFor="let productName of productsForListBox" >{{productName}}</option>
+                      </select>
+                </th>
+                <th><select class="form-select w-75" *ngIf="tables" aria-label="Default select example" #mySelect
+                    (change)='onOptionsSelectedTable(mySelect.value)'>
+                    <option selected value="0">Masalar</option>
+                    <option  *ngFor="let table of tables |tableStatus:2" >{{table.tableName}}</option>
+                  </select></th>
+                <th>Miktar</th>
+                <th>Durum</th>
+                <th>Güncelle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let orderDetail of orderDetails;let i = index" [attr.data-index]="i">
+                <td>{{i+1}}</td>
+                <td>{{orderDetail.categoryName}}</td>
+                <td>{{orderDetail.productName}}</td>
+                <td>{{orderDetail.tableName}}</td>
+                <td>{{orderDetail.quantity}}</td>
+               
+                <td *ngIf="orderDetail.orderStatusName=='Bekliyor'"><button class="btn btn-sm btn-warning" (click)="changeOrderStatu(orderDetail,2)">İşleme Al</button></td>
+                <td *ngIf="orderDetail.orderStatusName=='Hazirlaniyor'"><button class="btn btn-sm btn-primary" (click)="changeOrderStatu(orderDetail,3)">Servis Et</button></td>
+                <td *ngIf="orderDetail.orderStatusName=='Servis Edildi'"><span class="bg-success p-1 text-light">{{orderDetail.orderStatusName}}</span></td>
+                <td><button class="btn btn-danger btn-sm"  (click)="downQuantity(orderDetail)"  >-</button>
+                    <button class="btn btn-success btn-sm mx-2"(click)="upQuantity(orderDetail)" >+</button></td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+<div class="px-4 mt-5 text-center" *ngIf="!storeBill"><h1>Günlük Hesap Henüz Açılmadı</h1></div>

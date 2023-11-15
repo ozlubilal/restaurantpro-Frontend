@@ -1,0 +1,94 @@
+<div class="row m-1">
+     <!-- sidebar -->
+    <div class="card col-md-2 bg-secondary " style="min-height:700px;">
+        <div class="card-header bg-light " *ngIf="categories">
+            <a class="" href="/cashier/index"> <h5>Ana Ekrana Dön</h5></a>
+            <h4 class="text-center" *ngIf="table">{{table.tableName}}</h4>
+            </div>
+        <!-- acordion -->
+        <div class="accordion mt-3" id="accordionExample">
+            <div class="accordion-item bg-light" *ngFor="let category of categories">
+                
+                    <button class="btn btn-light" type="button" (click)="getProductsByCategoryId(category.id)"
+                        data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                        aria-controls="collapseOne" style="font-size: 18px;">
+                        {{category.categoryName}}
+                    </button>
+               
+                <div id="collapseOne" *ngFor="let product of productsOfCategory" class="accordion-collapse collapse show "
+                    aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body" *ngIf="product&&product.categoryId==category.id">
+                        <button class="btn btn-warning btn-sm" (click)="addOrder(product)">{{product.productName}}</button>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    <!-- content -->
+    <div class="card col">
+        <div class="card-header">
+            <h3 class=" px-2 text-dark" *ngIf="table">Hesap Özeti</h3>
+        </div>
+        <div class="card-body" *ngIf="orderDetailsLength!=0">
+            <table class="table" >
+                <thead>
+                    <tr>
+                        <th style="width: 5%"></th>
+                        <th class="text-center"></th>
+                        <th>Durum</th>
+                        <th>Ürün Adı</th>
+                        <th class="text-center">Fiyat</th>
+                        <th class="text-center">Miktar</th>
+                        <th class="text-center">Tutar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let orderDetail of orderDetails;let i = index;let sum=index" [attr.data-index]="i"
+                        [attr.data-index]="sum">
+                        <td class="border-2 text-center">{{i+1}}</td>
+                        <td ><button class="btn btn-danger btn-sm"
+                                (click)="downQuantity(orderDetail)">-</button><button
+                                class="btn btn-success btn-sm mx-2" (click)="upQuantity(orderDetail)">+</button></td>
+                               
+                        <td class="" *ngIf="orderDetail.orderStatusName=='Bekliyor'"><button class="btn btn-sm btn-warning"
+                                (click)="changeOrderStatu(orderDetail,2)">İşleme Al</button></td>
+                        <td *ngIf="orderDetail.orderStatusName=='Hazirlaniyor'"><button class="btn btn-sm btn-primary"
+                                (click)="changeOrderStatu(orderDetail,3)">Servis Et</button></td>
+                        <td *ngIf="orderDetail.orderStatusName=='Servis Edildi'"><span
+                                class="bg-success p-1 text-light">{{orderDetail.orderStatusName}}</span></td>
+                        <td >{{orderDetail.productName}}</td>
+                        <td class="text-center">{{orderDetail.price}}</td>
+                        <td class="text-center">{{orderDetail.quantity}}</td>
+                        <td class="text-center">{{orderDetail.price*orderDetail.quantity}}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="bg-danger text-bg-danger text-lg text-center">
+                            <h5>Toplam</h5>
+                        </td>
+                        <td class="bg-danger text-bg-danger text-lg text-center">
+                            <h5>{{totalCost}}</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="bg-info text-bg-info text-lg text-center"> <button class="bg-info border-0" (click)="payBill()">
+                                <h5>Tahsil Et</h5>
+                            </button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
